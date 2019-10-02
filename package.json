@@ -1,0 +1,26 @@
+{
+    "name": "postgres-hr",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "sandbox": "node build/sandbox.js",
+        "tsc": "tsc",
+        "tsc:w": "tsc --watch"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@types/pg": "^7.4.14",
+        "module-alias": "^2.2.0",
+        "pg": "^7.11.0"
+    },
+    "devDependencies": {
+        "typescript": "^3.5.3"
+    },
+    "_moduleAliases": {
+        "@": "build"
+    }
+}
