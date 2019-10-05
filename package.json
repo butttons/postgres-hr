@@ -4,20 +4,25 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "nodemon build/server.js",
         "sandbox": "node build/sandbox.js",
         "tsc": "tsc",
-        "tsc:w": "tsc --watch"
+        "tsc:w": "tsc --watch",
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [],
-    "author": "",
-    "license": "ISC",
+    "author": "butttons",
+    "license": "MIT",
     "dependencies": {
+        "@types/graphql": "^14.5.0",
         "@types/pg": "^7.4.14",
+        "body-parser": "^1.19.0",
+        "express": "^4.17.1",
         "module-alias": "^2.2.0",
         "pg": "^7.11.0"
     },
     "devDependencies": {
+        "@types/express": "^4.17.1",
         "typescript": "^3.5.3"
     },
     "_moduleAliases": {

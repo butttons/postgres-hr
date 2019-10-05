@@ -1,23 +1,19 @@
 require('module-alias/register');
 
 import { client } from '@/utils/pg';
-import { utilsFactory, RoleGrants } from './utils/factories';
+import { utilsFactory } from './utils/factories';
+import { InformationSchema } from './utils/@types-information';
 
 (async () => {
+    const availableSchemas = ['ecom_public', 'ecom_private'];
     // const qr = await client.query('SELECT * FROM pg_roles');
-    /* const utils = utilsFactory(client);
+    const utils = utilsFactory(client);
     // const allRoles = await roleUtils.allRoles();
     const tableGrants = await utils.getGrants(
         ['ecom_admin', 'ecom_user', 'ecom_anon'],
-        RoleGrants.TABLE,
+        InformationSchema.TableNames.RoleGrants.OBJECT,
     );
-    console.log('tableGrants:', tableGrants);
-    return; */
-    const qr = await client.query({
-        text:
-            'SELECT * FROM information_schema.columns WHERE table_schema IN ($1, $2)',
-        values: ['ecom_public', 'ecom_private'],
-    });
-    console.log('qr:', qr.rows);
+    const allColumns = await utils.allRoutines(availableSchemas);
+    console.log('allColumns:', tableGrants);
     process.exit();
 })();
