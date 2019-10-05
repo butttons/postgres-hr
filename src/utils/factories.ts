@@ -31,6 +31,12 @@ export const utilsFactory = (client: Client) => ({
             .query(selectWhereIn(table, ['*'], 'grantee', grantees))
             .then(fetchRows)
             .catch(catchError),
+    allSchemas: async (): Promise<Maybe<string[]>> =>
+        await client
+            .query('SELECT schema_name FROM information_schema.schemata;')
+            .then(fetchRows)
+            .then((rows) => rows.map((r) => r.schema_name))
+            .catch(catchError),
     allRoles: async (): Promise<Maybe<string[]>> =>
         await client
             .query('SELECT rolname FROM pg_roles')

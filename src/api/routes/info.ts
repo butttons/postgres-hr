@@ -28,3 +28,11 @@ info.post('/', async (req, res) => {
         routines,
     });
 });
+info.get('/init', async (req, res) => {
+    const { allSchemas, allRoles } = utilsFactory(client);
+    const [schemas, roles] = await Promise.all([allSchemas(), allRoles()]);
+    res.json({
+        schemas,
+        roles,
+    });
+});
