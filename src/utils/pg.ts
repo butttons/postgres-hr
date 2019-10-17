@@ -1,10 +1,11 @@
 import { Client } from 'pg';
 
-export const client = new Client({
+export const pgConfig = {
     user: 'postgres',
     host: 'localhost',
-    database: 'ecom',
+    database: 'hr_test',
     password: 'postgres',
     port: 5433,
-});
+};
+export const client = new Client(pgConfig);
 client.connect();

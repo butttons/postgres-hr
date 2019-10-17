@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { utilsFactory } from '@/utils/factories';
+import { utilsFactory } from '@/utils/api-factories';
 import { client } from '@/utils/pg';
 
 export const info = Router();

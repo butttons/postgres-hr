@@ -1,0 +1,12 @@
+{
+  "clients": {
+    "i4_KtoNG": {
+      "user": "postgres",
+      "host": "localhost",
+      "database": "ecom",
+      "password": "postgres",
+      "port": 5433
+    }
+  },
+  "currentClient": "i4_KtoNG"
+}
