@@ -1,12 +1,19 @@
 {
-  "clients": {
+  "connections": {
     "i4_KtoNG": {
       "user": "postgres",
       "host": "localhost",
       "database": "ecom",
       "password": "postgres",
       "port": 5433
+    },
+    "MCnuZdEx": {
+      "user": "postgres",
+      "password": "postgres",
+      "host": "localhost",
+      "port": 5433,
+      "database": "hr_test"
     }
   },
-  "currentClient": "i4_KtoNG"
+  "currentConnection": "i4_KtoNG"
 }

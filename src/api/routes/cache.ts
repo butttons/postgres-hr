@@ -5,45 +5,44 @@ import isEqual from 'lodash.isequal';
 export const cache = Router();
 import shortid from 'shortid';
 
-const hasCachedClient = (client: ConnectionConfig) => {
-    const clients = cacheDb.get('clients').value();
-    const cachedClient = Object.entries(clients).find((c) =>
-        isEqual(c[1], client),
+const hasCachedConnection = (connection: ConnectionConfig) => {
+    const connections = cacheDb.get('connections').value();
+    const cachedConnection = Object.values(connections).find((c) =>
+        isEqual(c, connection),
     );
-    const hasClient = cachedClient !== undefined;
-    const clientId = hasClient ? cachedClient[0] : null;
-    return [hasClient, clientId];
+    const hasConnection = cachedConnection !== undefined;
+    return hasConnection;
 };
-const addClient = (client: ConnectionConfig) => {
-    const clients = cacheDb.get('clients');
+const addConnection = (connection: ConnectionConfig) => {
+    const connections = cacheDb.get('connections');
     const newId = shortid();
-    // @ts-ignore
-    clients.set(newId, client).write();
+    connections.set(newId, connection).write();
     return newId;
 };
+const allConnections = () => cacheDb.get('connections').value();
 
-cache.get('/clients', (req, res) => {
-    const clients = cacheDb.get('clients').value();
-    res.json(clients);
+cache.get('/connections', (req, res) => {
+    const connections = allConnections();
+    res.json(connections);
 });
 cache.get('/current', (req, res) => {
-    const currentId = cacheDb.get('currentClient').value();
-    const cachedClients = cacheDb.get('clients').value();
-    if (currentId in cachedClients) {
-        res.json(cachedClients[currentId]);
-    } else {
-        res.json({ notCached: true });
-    }
+    const currentId = cacheDb.get('currentConnection').value();
+    res.json({ currentId });
 });
-cache.post('/client', (req, res) => {
-    const newClient = req.body.client;
-    const [hasClient, clientId] = hasCachedClient(newClient);
-    if (!hasClient) {
-        const clientId = addClient(newClient);
-        cacheDb.set('currentClient', clientId).write();
-        res.json({ clientId });
+cache.post('/newConnection', (req, res) => {
+    const newConnection = req.body.connection;
+    const hasConnection = hasCachedConnection(newConnection);
+    if (!hasConnection) {
+        addConnection(newConnection);
+        const connections = allConnections();
+        res.json({ connections, status: { success: true } });
         return;
     }
-    cacheDb.set('currentClient', clientId).write();
-    res.json({ clientId });
+    const connections = allConnections();
+    res.json({ connections, status: { success: true } });
+});
+cache.post('/setConnection', (req, res) => {
+    const connectionId = req.body.connectionId;
+    cacheDb.set('currentConnection', connectionId).write();
+    res.json({ connectionId });
 });

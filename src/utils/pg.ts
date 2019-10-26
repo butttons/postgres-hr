@@ -1,11 +1,7 @@
-import { Client } from 'pg';
-
-export const pgConfig = {
-    user: 'postgres',
-    host: 'localhost',
-    database: 'hr_test',
-    password: 'postgres',
-    port: 5433,
+import { Client, ConnectionConfig } from 'pg';
+import { currentConnection } from '@/utils/cache-db/utils';
+export const clientFactory = () => {
+    const client = new Client(currentConnection());
+    client.connect();
+    return client;
 };
-export const client = new Client(pgConfig);
-client.connect();

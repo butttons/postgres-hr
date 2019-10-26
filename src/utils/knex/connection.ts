@@ -1,6 +1,5 @@
 import knex from 'knex';
 
-import { pgConfig } from './../pg';
 export const db = knex({
     client: 'pg',
     connection: {

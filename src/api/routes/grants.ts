@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import { utilsFactory } from '@/utils/api-factories';
-import { client } from '@/utils/pg';
+import { client, clientFactory } from '@/utils/pg';
 import { InformationSchema } from '@/utils/@types-information';
 
 export const grants = Router();
 
 grants.post('/', async (req, res) => {
-    const { getGrants } = utilsFactory(client);
+    const { getGrants } = utilsFactory(clientFactory());
     const grantees = req.body.grantees;
     const [columns, objects, routines, tables] = await Promise.all([
         getGrants(grantees, InformationSchema.TableNames.RoleGrants.COLUMN),
@@ -30,7 +30,7 @@ grants.post('/list', async (req, res) => {
         allTables,
         allTriggers,
         allRoutines,
-    } = utilsFactory(client);
+    } = utilsFactory(clientFactory());
     const { schemas, grantees } = req.body;
     const [columns, roles, tables, triggers, routines] = await Promise.all([
         allColumns(schemas),

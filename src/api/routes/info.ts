@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { utilsFactory } from '@/utils/api-factories';
-import { client } from '@/utils/pg';
+import { client, clientFactory } from '@/utils/pg';
 
 export const info = Router();
 
@@ -11,7 +11,7 @@ info.post('/', async (req, res) => {
         allTables,
         allTriggers,
         allRoutines,
-    } = utilsFactory(client);
+    } = utilsFactory(clientFactory());
     const schemas = req.body.schemas;
     const [columns, roles, tables, triggers, routines] = await Promise.all([
         allColumns(schemas),
@@ -29,7 +29,7 @@ info.post('/', async (req, res) => {
     });
 });
 info.get('/init', async (req, res) => {
-    const { allSchemas, allRoles } = utilsFactory(client);
+    const { allSchemas, allRoles } = utilsFactory(clientFactory());
     const [schemas, roles] = await Promise.all([allSchemas(), allRoles()]);
     res.json({
         schemas,
