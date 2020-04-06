@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { utilsFactory } from '@/utils/api-factories';
-import { client, clientFactory } from '@/utils/pg';
+import { clientFactory } from '@/utils/pg';
 
 export const info = Router();
 
@@ -35,4 +35,11 @@ info.get('/init', async (req, res) => {
         schemas,
         roles,
     });
+});
+
+info.post('/query', async (req, res) => {
+    const query = req.body.sql;
+    const client = clientFactory();
+    await client.query(query);
+    res.send({ success: true });
 });

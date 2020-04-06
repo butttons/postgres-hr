@@ -21,6 +21,20 @@ const selectWhereIn = (
     )})`,
     values,
 });
+export interface TableInfo {
+    tables: InformationSchema.Default.Table[];
+    columns: InformationSchema.Default.Column[];
+    triggers: InformationSchema.Default.Trigger[];
+    routines: InformationSchema.Default.Routine[];
+    roles: string[];
+}
+export interface GrantInfo {
+    columnGrants: InformationSchema.Grants.Column[];
+    objectGrants: InformationSchema.Grants.Usage[];
+    routineGrants: InformationSchema.Grants.Routine[];
+    tableGrants: InformationSchema.Grants.Table[];
+}
+
 const DEFAULT_TABLE_COLUMNS = ['table_schema', 'table_name'];
 export const utilsFactory = (client: Client) => ({
     getGrants: async (
@@ -107,4 +121,48 @@ export const utilsFactory = (client: Client) => ({
             )
             .then(fetchRows)
             .catch(catchError),
+    allInfo: async (schemas: string[]): Promise<TableInfo> => {
+        const {
+            allColumns,
+            allRoles,
+            allTables,
+            allTriggers,
+            allRoutines,
+        } = utilsFactory(client);
+        const [columns, roles, tables, triggers, routines] = await Promise.all([
+            allColumns(schemas),
+            allRoles(),
+            allTables(schemas),
+            allTriggers(schemas),
+            allRoutines(schemas),
+        ]);
+        return { columns, roles, tables, triggers, routines };
+    },
+    allGrants: async (grantees: string[]): Promise<GrantInfo> => {
+        const { getGrants } = utilsFactory(client);
+        const [
+            columnGrants,
+            objectGrants,
+            routineGrants,
+            tableGrants,
+        ] = await Promise.all([
+            getGrants(
+                grantees,
+                InformationSchema.TableNames.RoleGrants.COLUMN,
+            ) as Promise<InformationSchema.Grants.Column[]>,
+            getGrants(
+                grantees,
+                InformationSchema.TableNames.RoleGrants.OBJECT,
+            ) as Promise<InformationSchema.Grants.Usage[]>,
+            getGrants(
+                grantees,
+                InformationSchema.TableNames.RoleGrants.ROUTINE,
+            ) as Promise<InformationSchema.Grants.Routine[]>,
+            getGrants(
+                grantees,
+                InformationSchema.TableNames.RoleGrants.TABLE,
+            ) as Promise<InformationSchema.Grants.Table[]>,
+        ]);
+        return { columnGrants, objectGrants, routineGrants, tableGrants };
+    },
 });

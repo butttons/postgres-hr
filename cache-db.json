@@ -13,7 +13,14 @@
       "host": "localhost",
       "port": 5433,
       "database": "hr_test"
+    },
+    "qrSHvBG4S": {
+      "user": "postgres",
+      "password": "postgres",
+      "host": "localhost",
+      "port": 5433,
+      "database": "word_alert"
     }
   },
-  "currentConnection": "i4_KtoNG"
+  "currentConnection": "qrSHvBG4S"
 }
