@@ -31,6 +31,10 @@ info.post('/', async (req, res) => {
 });
 info.get('/init', async (req, res) => {
     const client = clientFactory();
+    if (client === null) {
+        res.json({ noConfig: true });
+        return;
+    }
     const { allSchemas, allRoles } = utilsFactory(client);
     const [schemas, roles] = await Promise.all([allSchemas(), allRoles()]);
     res.json({
