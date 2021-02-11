@@ -20,7 +20,21 @@
       "host": "localhost",
       "port": 5433,
       "database": "word_alert"
+    },
+    "PA2Z-jcQF": {
+      "user": "postgres",
+      "password": "postgres",
+      "host": "127.0.0.1",
+      "port": 5433,
+      "database": "foodie"
+    },
+    "DBBwy_vsX": {
+      "user": "postgres",
+      "password": "postgres",
+      "host": "localhost",
+      "port": 5433,
+      "database": "zomunk"
     }
   },
-  "currentConnection": "qrSHvBG4S"
+  "currentConnection": "i4_KtoNG"
 }

@@ -1,6 +1,5 @@
 require('module-alias/register');
 
-import { client } from '@/utils/pg';
 import { utilsFactory } from './utils/api-factories';
 import { InformationSchema } from './utils/@types-information';
 import { cacheDb } from '@/utils/cache-db/lowdb';

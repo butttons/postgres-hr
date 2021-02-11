@@ -5,13 +5,14 @@ import { clientFactory } from '@/utils/pg';
 export const info = Router();
 
 info.post('/', async (req, res) => {
+    const client = await clientFactory();
     const {
         allColumns,
         allRoles,
         allTables,
         allTriggers,
         allRoutines,
-    } = utilsFactory(clientFactory());
+    } = utilsFactory(client);
     const schemas = req.body.schemas;
     const [columns, roles, tables, triggers, routines] = await Promise.all([
         allColumns(schemas),
@@ -29,7 +30,8 @@ info.post('/', async (req, res) => {
     });
 });
 info.get('/init', async (req, res) => {
-    const { allSchemas, allRoles } = utilsFactory(clientFactory());
+    const client = clientFactory();
+    const { allSchemas, allRoles } = utilsFactory(client);
     const [schemas, roles] = await Promise.all([allSchemas(), allRoles()]);
     res.json({
         schemas,

@@ -79,5 +79,4 @@ export const generateList = async (
         // acc.push(entityRow(EntityTypes.TABLE, labels.table(table), ));
         return res;
     }, []); */
-    return result;
 };

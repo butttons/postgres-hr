@@ -4,12 +4,15 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "dev": "nodemon build/server.js --ignore 'cache-db.json'",
+        "dev": "PORT=4000 nodemon build/server.js --ignore 'cache-db.json'",
         "tsc:w": "tsc --watch",
         "sandbox": "node build/sandbox.js",
         "db:schema": "node build/utils/test-db/schema.js",
         "tsc": "tsc",
         "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "bin": {
+        "postgres-hr": "./build/server.js"
     },
     "keywords": [],
     "author": "butttons",
@@ -24,7 +27,7 @@
         "lodash.isequal": "^4.5.0",
         "lowdb": "^1.0.0",
         "module-alias": "^2.2.0",
-        "pg": "^7.12.1",
+        "pg": "^8.5.1",
         "reflect-metadata": "^0.1.10",
         "shortid": "^2.2.15",
         "typeorm": "^0.2.16"

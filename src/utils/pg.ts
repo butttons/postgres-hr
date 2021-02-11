@@ -1,7 +1,11 @@
-import { Client, ConnectionConfig } from 'pg';
-import { currentConnection } from '@/utils/cache-db/utils';
+import { Client } from 'pg';
+import { currentConnectionConfig } from '@/utils/cache-db/utils';
+
+const clientMap = new Map();
+
 export const clientFactory = () => {
-    const client = new Client(currentConnection());
+    const info = currentConnectionConfig();
+    const client = new Client(info.config);
     client.connect();
     return client;
 };

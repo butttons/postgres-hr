@@ -1,9 +1,6 @@
 import { cacheDb } from './lowdb';
-export const currentConnection = () => {
+export const currentConnectionConfig = () => {
     const currentId = cacheDb.get('currentConnection').value();
-    const connection = cacheDb
-        .get('connections')
-        .get(currentId)
-        .value();
-    return connection;
+    const config = cacheDb.get('connections').get(currentId).value();
+    return { config, currentId };
 };
