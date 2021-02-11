@@ -9,18 +9,6 @@ export const enum EntityTypes {
     OBJECT = 'object',
     TRIGGER = 'trigger',
 }
-const filters = {
-    columns: (t: InformationSchema.Default.Table) => (
-        c: InformationSchema.Default.Column,
-    ) => c.table_name === t.table_name && c.table_schema === t.table_schema,
-    tableGrants: (t: InformationSchema.Default.Table) => (
-        tg: InformationSchema.Grants.Table,
-    ) => tg.table_name === t.table_name && tg.table_schema === t.table_schema,
-};
-const labels = {
-    table: (t: InformationSchema.Default.Table) =>
-        `${t.table_schema}.${t.table_name}`,
-};
 
 interface EntityRow {
     type: EntityTypes;
@@ -59,24 +47,4 @@ export const generateList = async (
     const maps = {
         [EntityTypes.TABLE]: {},
     };
-    /* const result = info.tables.reduce((res, table) => {
-        const { table_name, table_schema } = table;
-        const columns = info.columns.filter(filters.columns(table));
-
-        const tableGrants = grants.tableGrants
-            .filter(filters.tableGrants(table))
-            .reduce((acc, tg) => {
-                console.log(tg);
-                const grants = grantees.reduce((tacc, g) => {
-                    tacc[g] = 
-                    return tacc;
-                }, {})
-                const row = entityRow(EntityTypes.TABLE, labels.table, )
-                return acc;
-            }, {});
-        console.log('tableGrants:', tableGrants);
-
-        // acc.push(entityRow(EntityTypes.TABLE, labels.table(table), ));
-        return res;
-    }, []); */
 };

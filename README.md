@@ -1,7 +1,34 @@
-# Awesome Project Build with TypeORM
+# PostgresHR
 
-Steps to run this project:
+Manage Postgres roles in a sane way.
 
-1. Run `npm i` command
-2. Setup database settings inside `ormconfig.json` file
-3. Run `npm start` command
+## Installation
+
+```bash
+npm i -g postgres-hr
+```
+
+## Usage
+
+```
+postgres-hr
+```
+
+The UI will be available at http://localhost:9876
+To run the interface at a different port, set the `PORT` environment variable.
+
+```
+PORT=1234 postgres-hr
+```
+
+1. Add a new connection.
+2. Select it from top right dropdown.
+3. Select the roles & schemas you want to work with.
+4. Click away on the permissions on the column, table, etc under the roles.
+
+-   Functions associated with a trigger will appear under that trigger.
+-   Triggers associated with a table will appear under that table.
+
+## Disclaimer
+
+I made this over an year ago, and have been using it internally for my hobby projects. This is not intended to be used on production databases, please proceed with caution. Use this on a local copy and then `pg_dumpall --roles`.

@@ -22,6 +22,7 @@ const addConnection = (connection: ConnectionConfig) => {
 const allConnections = () => cacheDb.get('connections').value();
 const removeConnection = (connectionId: string) => {
     cacheDb.get('connections').unset(connectionId).write();
+    cacheDb.set('currentConnection', null).write();
 };
 
 cache.get('/connections', (req, res) => {
