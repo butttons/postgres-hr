@@ -5,5 +5,5 @@ import { createServer } from 'http';
 import { app } from './app';
 const server = createServer(app);
 
-const port = +process.env.PORT || 3000;
+const port = +process.env.PORT || 9876;
 server.listen(port, () => console.log(`Started on http://localhost:${port}`));

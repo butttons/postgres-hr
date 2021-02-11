@@ -20,6 +20,9 @@ const addConnection = (connection: ConnectionConfig) => {
     return newId;
 };
 const allConnections = () => cacheDb.get('connections').value();
+const removeConnection = (connectionId: string) => {
+    cacheDb.get('connections').unset(connectionId).write();
+};
 
 cache.get('/connections', (req, res) => {
     const connections = allConnections();
@@ -38,6 +41,12 @@ cache.post('/newConnection', (req, res) => {
         res.json({ connections, status: { success: true } });
         return;
     }
+    const connections = allConnections();
+    res.json({ connections, status: { success: true } });
+});
+cache.post('/removeConnection', (req, res) => {
+    const connectionId = req.body.connectionId;
+    removeConnection(connectionId);
     const connections = allConnections();
     res.json({ connections, status: { success: true } });
 });

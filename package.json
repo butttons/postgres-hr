@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "dev": "PORT=4000 nodemon build/server.js --ignore 'cache-db.json'",
+        "dev": "PORT=9876 nodemon build/server.js --ignore 'cache-db.json'",
         "tsc:w": "tsc --watch",
         "sandbox": "node build/sandbox.js",
         "db:schema": "node build/utils/test-db/schema.js",
