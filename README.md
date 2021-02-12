@@ -1,5 +1,7 @@
 # PostgresHR
 
+[![npm](https://badgen.net/npm/v/postgres-hr)](https://www.npmjs.com/package/postgres-hr)
+
 Manage Postgres roles in a sane way.
 
 ## Installation
@@ -7,6 +9,8 @@ Manage Postgres roles in a sane way.
 ```bash
 npm i -g postgres-hr
 ```
+
+![Example](https://i.imgur.com/bfDeBIP.png)
 
 ## Usage
 
@@ -32,3 +36,4 @@ PORT=1234 postgres-hr
 ## Disclaimer
 
 I made this over an year ago, and have been using it internally for my hobby projects. This is not intended to be used on production databases, please proceed with caution. Use this on a local copy and then `pg_dumpall --roles`.
+Interface available here: https://github.com/butttons/postgres-hr-interface

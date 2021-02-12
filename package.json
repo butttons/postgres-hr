@@ -1,10 +1,10 @@
 {
     "name": "postgres-hr",
-    "version": "0.0.2",
+    "version": "0.0.21",
     "description": "Manage Postgres roles in a sane way",
     "main": "build/server.js",
     "scripts": {
-        "dev": "PORT=9876 nodemon build/server.js --ignore 'cache-db.json'",
+        "dev": "PORT=9876 nodemon build/server.js --ignore 'postgres-hr.json'",
         "tsc:w": "tsc --watch",
         "build": "tsc",
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -32,6 +32,7 @@
         "lowdb": "^1.0.0",
         "module-alias": "^2.2.0",
         "pg": "^8.5.1",
+        "platform-folders": "^0.5.2",
         "reflect-metadata": "^0.1.10",
         "shortid": "^2.2.15"
     },
