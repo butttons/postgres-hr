@@ -36,4 +36,7 @@ PORT=1234 postgres-hr
 ## Disclaimer
 
 I made this over an year ago, and have been using it internally for my hobby projects. This is not intended to be used on production databases, please proceed with caution. Use this on a local copy and then `pg_dumpall --roles`.
+
 Interface available here: https://github.com/butttons/postgres-hr-interface
+
+Tested manually with _PostgreSQL 11.9_ only.
