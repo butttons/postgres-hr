@@ -27,7 +27,7 @@
         "body-parser": "^1.19.0",
         "cors": "^2.8.5",
         "express": "^4.17.1",
-        "knex": "^0.21.17",
+        "knex": "^2.4.0",
         "lodash.isequal": "^4.5.0",
         "lowdb": "^1.0.0",
         "module-alias": "^2.2.0",
